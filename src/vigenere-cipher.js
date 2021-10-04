@@ -20,12 +20,24 @@ import { NotImplementedError } from '../extensions/index.js';
  * 
  */
 export default class VigenereCipheringMachine {
-  encrypt() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+
+  encrypt(message, key) {
+
+    let alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.!?,:;'/ ";
+    let encryptWord = "";
+    for (let i = 0;i < message.length;i++) {
+      encryptWord += alphabet.charAt((alphabet.indexOf(message.charAt(i)) + alphabet.indexOf(key.charAt(i % key.length))) % alphabet.length);
+    }
+    return encryptWord;
+
   }
-  decrypt() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+
+  decrypt(encryptedMessage, key) {
+    let alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.!?,:;'/ ";
+    let decryptWord = "";
+    for (let i = 0;i < encryptedMessage.length;i++) {
+      decryptWord += alphabet.charAt(((alphabet.indexOf(encryptedMessage.charAt(i)) + alphabet.length) - alphabet.indexOf(key.charAt(i % key.length))) % alphabet.length);
+    }
+    return decryptWord;
   }
 }
